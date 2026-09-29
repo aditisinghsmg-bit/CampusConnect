@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Blogs | CampusConnect</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="./css/style.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <style>
+
+        /* =====================================================
+           BLOGS PAGE
+           ===================================================== */
+
+        .blogs-page {
+            width: 90%;
+            max-width: 1200px;
+            margin: 60px auto 100px;
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+           ===================================================== */
+
+        .blogs-header {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 45px;
+        }
+
+        .blogs-header .small-title {
+            display: inline-block;
+
+            color: #2563eb;
+
+            background: #eff6ff;
+
+            padding: 7px 15px;
+
+            border-radius: 50px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+        }
+
+        .blogs-header h1 {
+            font-size: 45px;
+
+            color: #0f172a;
+
+            margin-bottom: 15px;
+
+            line-height: 1.25;
+        }
+
+        .blogs-header p {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           SEARCH
+           ===================================================== */
+
+        .blog-search-container {
+            max-width: 650px;
+
+            margin: 0 auto 35px;
+
+            display: flex;
+
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 12px;
+
+            padding: 6px;
+
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .blog-search-container i {
+            display: flex;
+
+            align-items: center;
+
+            padding-left: 15px;
+
+            color: #94a3b8;
+        }
+
+        .blog-search-container input {
+            flex: 1;
+
+            border: none;
+
+            outline: none;
+
+            padding: 13px;
+
+            font-family: inherit;
+
+            font-size: 13px;
+        }
+
+        .blog-search-container button {
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 0 22px;
+
+            border-radius: 8px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 500;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .blog-search-container button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =====================================================
+           CATEGORY FILTER
+           ===================================================== */
+
+        .category-filter {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 45px;
+        }
+
+        .filter-btn {
+            border: 1px solid #e2e8f0;
+
+            background: white;
+
+            color: #64748b;
+
+            padding: 9px 17px;
+
+            border-radius: 50px;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: #2563eb;
+
+            color: #2563eb;
+        }
+
+        .filter-btn.active {
+            background: #2563eb;
+
+            color: white;
+
+            border-color: #2563eb;
+        }
+
+
+        /* =====================================================
+           BLOG COUNT
+           ===================================================== */
+
+        .blog-result-info {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .blog-result-info h2 {
+            color: #0f172a;
+
+            font-size: 20px;
+        }
+
+        .blog-result-info span {
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           BLOG GRID
+           ===================================================== */
+
+        .blogs-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* =====================================================
+           BLOG CARD
+           ===================================================== */
+
+        .blog-item {
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .blog-item:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 20px 45px rgba(15, 23, 42, 0.10);
+        }
+
+
+        /* =====================================================
+           BLOG IMAGE
+           ===================================================== */
+
+        .blog-item-image {
+            position: relative;
+
+            height: 210px;
+
+            overflow: hidden;
+        }
+
+        .blog-item-image img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.5s ease;
+        }
+
+        .blog-item:hover
+        .blog-item-image img {
+            transform: scale(1.06);
+        }
+
+
+        /* CATEGORY */
+
+        .blog-category {
+            position: absolute;
+
+            top: 15px;
+
+            left: 15px;
+
+            background: white;
+
+            color: #2563eb;
+
+            padding: 6px 11px;
+
+            border-radius: 50px;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.08);
+        }
+
+
+        /* =====================================================
+           BLOG BODY
+           ===================================================== */
+
+        .blog-item-body {
+            padding: 22px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            flex: 1;
+        }
+
+        .blog-item-body h3 {
+            color: #0f172a;
+
+            font-size: 17px;
+
+            line-height: 1.45;
+
+            margin-bottom: 10px;
+        }
+
+        .blog-item-body > p {
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =====================================================
+           AUTHOR
+           ===================================================== */
+
+        .blog-meta {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: auto;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .blog-author-mini {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .mini-avatar {
+            width: 30px;
+
+            height: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+
+            color: #2563eb;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+        .blog-author-mini span {
+            color: #475569;
+
+            font-size: 10px;
+
+            font-weight: 500;
+        }
+
+        .blog-date {
+            color: #94a3b8;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           READ MORE
+           ===================================================== */
+
+        .read-more {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            color: #2563eb;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            margin-top: 12px;
+
+            transition: 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 10px;
+        }
+
+
+        /* =====================================================
+           EMPTY RESULT
+           ===================================================== */
+
+        .no-results {
+            display: none;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            grid-column: 1 / -1;
+        }
+
+        .no-results i {
+            font-size: 45px;
+
+            color: #cbd5e1;
+
+            margin-bottom: 15px;
+        }
+
+        .no-results h3 {
+            color: #334155;
+
+            margin-bottom: 8px;
+        }
+
+        .no-results p {
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           PAGINATION
+           ===================================================== */
+
+        .pagination {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: 55px;
+        }
+
+        .page-btn {
+            width: 38px;
+
+            height: 38px;
+
+            border: 1px solid #e2e8f0;
+
+            background: white;
+
+            color: #64748b;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            transition: 0.3s ease;
+        }
+
+        .page-btn:hover {
+            color: #2563eb;
+
+            border-color: #2563eb;
+        }
+
+        .page-btn.active {
+            background: #2563eb;
+
+            color: white;
+
+            border-color: #2563eb;
+        }
+
+
+        /* =====================================================
+           FEATURED SECTION
+           ===================================================== */
+
+        .featured-blog {
+            display: grid;
+
+            grid-template-columns:
+                1.1fr 1fr;
+
+            background: #eff6ff;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-bottom: 60px;
+        }
+
+        .featured-image {
+            min-height: 330px;
+        }
+
+        .featured-image img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 45px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .featured-content .featured-label {
+            color: #2563eb;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+        }
+
+        .featured-content h2 {
+            color: #0f172a;
+
+            font-size: 30px;
+
+            line-height: 1.35;
+
+            margin-bottom: 15px;
+        }
+
+        .featured-content p {
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            margin-bottom: 20px;
+        }
+
+        .featured-content .featured-btn {
+            width: fit-content;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .blogs-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .featured-blog {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                min-height: 280px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .blogs-page {
+                width: 92%;
+
+                margin-top: 35px;
+            }
+
+            .blogs-header h1 {
+                font-size: 32px;
+            }
+
+            .blogs-header p {
+                font-size: 13px;
+            }
+
+            .blog-search-container {
+                width: 100%;
+            }
+
+            .blog-search-container button {
+                padding: 0 14px;
+            }
+
+            .blogs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-result-info {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+            .featured-content {
+                padding: 28px;
+            }
+
+            .featured-content h2 {
+                font-size: 24px;
+            }
+
+            .category-filter {
+                justify-content: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    CampusConnect
+                </span>
+
+            </div>
+
+
+            <!-- NAV LINKS -->
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="blogs.html"
+                       class="active">
+                        Blogs
+                    </a>
+                </li>
+
+                <li>
+                    <a href="create-blog.html">
+                        Write Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- NAV RIGHT -->
+
+            <div class="nav-right">
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        placeholder="Search blogs..."
+                        id="navbarSearch">
+
+                    <button
+                        id="navbarSearchBtn">
+
+                        <i class="fa-solid fa-search"></i>
+
+                    </button>
+
+                </div>
+
+                <a href="login.html"
+                   class="btn login-btn">
+
+                    Login
+
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="blogs-page">
+
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        <section class="blogs-header">
+
+            <span class="small-title">
+                STUDENT STORIES & IDEAS
+            </span>
+
+            <h1>
+                Explore Campus Blogs
+            </h1>
+
+            <p>
+                Discover stories, experiences, tips and
+                knowledge shared by students from across
+                the campus community.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             FEATURED BLOG
+             ================================================= -->
+
+        <section class="featured-blog">
+
+
+            <div class="featured-image">
+
+                <img
+                    src="images/blog1.jpg"
+                    alt="Featured Blog">
+
+            </div>
+
+
+            <div class="featured-content">
+
+                <span class="featured-label">
+                    Featured Blog
+                </span>
+
+                <h2>
+                    How I Built My First Portfolio Website
+                </h2>
+
+                <p>
+                    Learn how a CSE student planned and created
+                    their first responsive portfolio using HTML,
+                    CSS and JavaScript.
+                </p>
+
+                <a href="blog.html" class="btn">
+    Read Featured Blog →
+</a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEARCH
+             ================================================= -->
+
+        <div class="blog-search-container">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="blogSearch"
+                placeholder="Search by title, category or keyword...">
+
+            <button id="searchBtn">
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTERS
+             ================================================= -->
+
+        <div class="category-filter">
+
+            <button
+                class="filter-btn active"
+                data-category="all">
+
+                All
+
+            </button>
+
+            <button
+                class="filter-btn"
+                data-category="technology">
+
+                Technology
+
+            </button>
+
+            <button
+                class="filter-btn"
+                data-category="programming">
+
+                Programming
+
+            </button>
+
+            <button
+                class="filter-btn"
+                data-category="career">
+
+                Career
+
+            </button>
+
+            <button
+                class="filter-btn"
+                data-category="student-life">
+
+                Student Life
+
+            </button>
+
+            <button
+                class="filter-btn"
+                data-category="projects">
+
+                Projects
+
+            </button>
+
+            <button
+                class="filter-btn"
+                data-category="college">
+
+                College
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             RESULT INFORMATION
+             ================================================= -->
+
+        <div class="blog-result-info">
+
+            <h2>
+                Latest Blogs
+            </h2>
+
+            <span id="resultCount">
+                Showing 9 blogs
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             BLOG GRID
+             ================================================= -->
+
+        <section
+            class="blogs-grid"
+            id="blogsGrid">
+
+
+            <!-- =================================================
+                 BLOG 1
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="technology"
+                data-title="How I Built My First Portfolio Website">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog1.jpg"
+                        alt="Portfolio Website">
+
+                    <span class="blog-category">
+                        Technology
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        How I Built My First Portfolio Website
+                    </h3>
+
+                    <p>
+                        A beginner's journey into HTML, CSS and
+                        JavaScript while creating a personal
+                        portfolio website.
+                    </p>
+
+                    <a
+                        href="blog.html"
+                        class="read-more">
+
+                        Read More
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                AS
+                            </div>
+
+                            <span>
+                                Aditi Singh
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 18, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 2
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="programming"
+                data-title="Why Every CSE Student Should Learn DSA">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog2.jpg"
+                        alt="DSA">
+
+                    <span class="blog-category">
+                        Programming
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        Why Every CSE Student Should Learn DSA
+                    </h3>
+
+                    <p>
+                        Understand why Data Structures and
+                        Algorithms are important for coding
+                        interviews and placements.
+                    </p>
+
+                    <a
+                        href="blog.html"
+                        class="read-more">
+
+                        Read More
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                RK
+                            </div>
+
+                            <span>
+                                Rahul Kumar
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 16, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 3
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="career"
+                data-title="How to Prepare for Your First Internship">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog3.jpg"
+                        alt="Internship">
+
+                    <span class="blog-category">
+                        Career
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        How to Prepare for Your First Internship
+                    </h3>
+
+                    <p>
+                        A practical roadmap for college students
+                        who want to get their first technical
+                        internship.
+                    </p>
+
+                    <a href="blog.html">Read More →</a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                PS
+                            </div>
+
+                            <span>
+                                Priya Sharma
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 14, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 4
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="student-life"
+                data-title="How to Manage College and Personal Life">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog4.jpg"
+                        alt="Student Life">
+
+                    <span class="blog-category">
+                        Student Life
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        How to Manage College and Personal Life
+                    </h3>
+
+                    <p>
+                        Simple strategies to manage classes,
+                        assignments, friends, hobbies and
+                        personal goals.
+                    </p>
+
+                    <a
+                        href="blog.html"
+                        class="read-more">
+
+                        Read More
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                NS
+                            </div>
+
+                            <span>
+                                Neha Singh
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 12, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 5
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="projects"
+                data-title="5 Mini Project Ideas for CSE Students">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog5.jpg"
+                        alt="Projects">
+
+                    <span class="blog-category">
+                        Projects
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        5 Mini Project Ideas for CSE Students
+                    </h3>
+
+                    <p>
+                        Interesting and practical project ideas
+                        that can help students improve their
+                        development skills.
+                    </p>
+
+                    <a
+                        href="blog.html"
+                        class="read-more">
+
+                        Read More
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                AM
+                            </div>
+
+                            <span>
+                                Aman Mishra
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 10, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 6
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="college"
+                data-title="Things I Wish I Knew Before College">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog6.jpg"
+                        alt="College Life">
+
+                    <span class="blog-category">
+                        College
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        Things I Wish I Knew Before College
+                    </h3>
+
+                    <p>
+                        Lessons, mistakes and useful advice that
+                        every first-year college student should
+                        know.
+                    </p>
+
+                    <a
+                        href="blog.html"
+                        class="read-more">
+
+                        Read More
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                VS
+                            </div>
+
+                            <span>
+                                Vikash Singh
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 08, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 7
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="technology"
+                data-title="AI Tools Every College Student Should Know">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog1.jpg"
+                        alt="AI Tools">
+
+                    <span class="blog-category">
+                        Technology
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        AI Tools Every College Student Should Know
+                    </h3>
+
+                    <p>
+                        Explore useful AI tools that can improve
+                        productivity, learning and project work.
+                    </p>
+
+                    <a
+                        href="blog.html"
+                        class="read-more">
+
+                        Read More
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                AD
+                            </div>
+
+                            <span>
+                                Aditya
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 06, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 8
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="career"
+                data-title="How to Build a Strong Resume as a Student">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog2.jpg"
+                        alt="Resume">
+
+                    <span class="blog-category">
+                        Career
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        How to Build a Strong Resume as a Student
+                    </h3>
+
+                    <p>
+                        Learn how to create a simple and
+                        professional resume even when you have
+                        limited experience.
+                    </p>
+
+                   <a href="dsa.html">Read More →</a>
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                RK
+                            </div>
+
+                            <span>
+                                Riya Kapoor
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 04, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BLOG 9
+                 ================================================= -->
+
+            <article
+                class="blog-item"
+                data-category="programming"
+                data-title="Java vs C++ Which Language Should You Learn">
+
+                <div class="blog-item-image">
+
+                    <img
+                        src="images/blog3.jpg"
+                        alt="Programming Languages">
+
+                    <span class="blog-category">
+                        Programming
+                    </span>
+
+                </div>
+
+
+                <div class="blog-item-body">
+
+                    <h3>
+                        Java vs C++: Which Language Should You Learn?
+                    </h3>
+
+                    <p>
+                        A beginner-friendly comparison of Java
+                        and C++ for students starting programming
+                        and DSA.
+                    </p>
+
+                    <a
+                        href="blog.html"
+                        class="read-more">
+
+                        Read More
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <div class="blog-meta">
+
+                        <div class="blog-author-mini">
+
+                            <div class="mini-avatar">
+                                RS
+                            </div>
+
+                            <span>
+                                Rohan Singh
+                            </span>
+
+                        </div>
+
+                        <span class="blog-date">
+                            Aug 02, 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 NO RESULTS
+                 ================================================= -->
+
+            <div
+                class="no-results"
+                id="noResults">
+
+                <i class="fa-solid fa-face-frown"></i>
+
+                <h3>
+                    No blogs found
+                </h3>
+
+                <p>
+                    Try searching for another keyword or
+                    selecting a different category.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PAGINATION
+             ================================================= -->
+
+        <div class="pagination">
+
+            <button
+                class="page-btn active">
+                1
+            </button>
+
+            <button
+                class="page-btn">
+                2
+            </button>
+
+            <button
+                class="page-btn">
+                3
+            </button>
+
+            <button
+                class="page-btn">
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <!-- ABOUT -->
+
+            <div class="footer-column footer-about">
+
+                <div class="footer-logo">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    <span>
+                        CampusConnect
+                    </span>
+
+                </div>
+
+                <p>
+                    A student-powered college blogging platform
+                    where ideas, experiences and knowledge come
+                    together.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="#">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK LINKS -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="blogs.html">
+                            Blogs
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="create-blog.html">
+                            Write Blog
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- CATEGORIES -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Categories
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#">
+                            Technology
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Programming
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Career
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Projects
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Student Life
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Contact Us
+                </h3>
+
+                <ul class="contact-list">
+
+                    <li>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <span>
+                            College Campus,
+                            Uttar Pradesh, India
+                        </span>
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <span>
+                            campusconnect@example.com
+                        </span>
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <span>
+                            +91 98765 43210
+                        </span>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER BOTTOM -->
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 CampusConnect.
+                All Rights Reserved.
+            </p>
+
+            <div class="footer-bottom-links">
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms & Conditions
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        /* =================================================
+           BLOG DATA / ELEMENTS
+           ================================================= */
+
+        const blogItems =
+            document.querySelectorAll(".blog-item");
+
+        const filterButtons =
+            document.querySelectorAll(".filter-btn");
+
+        const searchInput =
+            document.getElementById("blogSearch");
+
+        const searchButton =
+            document.getElementById("searchBtn");
+
+        const resultCount =
+            document.getElementById("resultCount");
+
+        const noResults =
+            document.getElementById("noResults");
+
+
+        let currentCategory = "all";
+
+
+        /* =================================================
+           FILTER BLOGS
+           ================================================= */
+
+        function filterBlogs() {
+
+            const searchText =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            let visibleBlogs = 0;
+
+
+            blogItems.forEach(function (blog) {
+
+                const category =
+                    blog.dataset.category
+                        .toLowerCase();
+
+                const title =
+                    blog.dataset.title
+                        .toLowerCase();
+
+                const content =
+                    blog.textContent
+                        .toLowerCase();
+
+
+                const categoryMatch =
+                    currentCategory === "all" ||
+                    category === currentCategory;
+
+
+                const searchMatch =
+                    searchText === "" ||
+                    title.includes(searchText) ||
+                    category.includes(searchText) ||
+                    content.includes(searchText);
+
+
+                if (
+                    categoryMatch &&
+                    searchMatch
+                ) {
+
+                    blog.style.display =
+                        "flex";
+
+                    visibleBlogs++;
+
+                } else {
+
+                    blog.style.display =
+                        "none";
+
+                }
+
+            });
+
+
+            /* ---------------------------------------------
+               Result Count
+               --------------------------------------------- */
+
+            resultCount.textContent =
+                "Showing " +
+                visibleBlogs +
+                " " +
+                (
+                    visibleBlogs === 1
+                        ? "blog"
+                        : "blogs"
+                );
+
+
+            /* ---------------------------------------------
+               No Results
+               --------------------------------------------- */
+
+            if (visibleBlogs === 0) {
+
+                noResults.style.display =
+                    "block";
+
+            } else {
+
+                noResults.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* =================================================
+           CATEGORY BUTTONS
+           ================================================= */
+
+        filterButtons.forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    filterButtons.forEach(
+                        function (btn) {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    currentCategory =
+                        button.dataset.category;
+
+
+                    filterBlogs();
+
+                }
+            );
+
+        });
+
+
+        /* =================================================
+           SEARCH
+           ================================================= */
+
+        searchButton.addEventListener(
+            "click",
+            function () {
+
+                filterBlogs();
+
+            }
+        );
+
+
+        searchInput.addEventListener(
+            "input",
+            function () {
+
+                filterBlogs();
+
+            }
+        );
+
+
+        searchInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+
+                    filterBlogs();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           NAVBAR SEARCH
+           ================================================= */
+
+        const navbarSearch =
+            document.getElementById(
+                "navbarSearch"
+            );
+
+        const navbarSearchBtn =
+            document.getElementById(
+                "navbarSearchBtn"
+            );
+
+
+        navbarSearchBtn.addEventListener(
+            "click",
+            function () {
+
+                searchInput.value =
+                    navbarSearch.value;
+
+                filterBlogs();
+
+                window.scrollTo({
+
+                    top: 500,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
+
+        navbarSearch.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+
+                    searchInput.value =
+                        navbarSearch.value;
+
+                    filterBlogs();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           URL SEARCH PARAMETER
+           ================================================= */
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const urlSearch =
+            urlParams.get("search");
+
+
+        const urlCategory =
+            urlParams.get("category");
+
+
+        if (urlSearch) {
+
+            searchInput.value =
+                urlSearch;
+
+            filterBlogs();
+
+        }
+
+
+        if (urlCategory) {
+
+            const category =
+                urlCategory.toLowerCase();
+
+
+            currentCategory =
+                category;
+
+
+            filterButtons.forEach(
+                function (button) {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+
+                    if (
+                        button.dataset.category ===
+                        category
+                    ) {
+
+                        button.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            filterBlogs();
+
+        }
+
+
+        /* =================================================
+           PAGINATION BUTTONS
+           ================================================= */
+
+        const pageButtons =
+            document.querySelectorAll(
+                ".page-btn"
+            );
+
+
+        pageButtons.forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    pageButtons.forEach(
+                        function (btn) {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    /*
+                       Demo pagination.
+                       Real pagination can later be
+                       connected with a backend/database.
+                    */
+
+                    window.scrollTo({
+
+                        top: 400,
+
+                        behavior: "smooth"
+
+                    });
+
+                }
+            );
+
+        });
+
+
+        /* =================================================
+           IMAGE ERROR HANDLING
+           ================================================= */
+
+        document
+            .querySelectorAll("img")
+            .forEach(function (image) {
+
+                image.addEventListener(
+                    "error",
+                    function () {
+
+                        image.style.background =
+                            "#e2e8f0";
+
+                    }
+                );
+
+            });
+
+
+        /* =================================================
+           INITIAL LOAD
+           ================================================= */
+
+        filterBlogs();
+
+        console.log(
+            "CampusConnect Blogs page loaded successfully!"
+        );
+
+    </script>
+
+
+    <!-- Main JavaScript -->
+
+    <script src="./js/script.js"></script>
+
+
+</body>
+
+</html>
