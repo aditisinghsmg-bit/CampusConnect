@@ -1,0 +1,11 @@
+MySQL Username
+if0_43395741 
+MySQL Password
+*************   
+MySQL Database Name
+if0_43395741_XXX
+See below for available database names
+MySQL Hostname
+sql112.infinityfree.com
+MySQL Port (optional)
+3306

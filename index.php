@@ -1,20 +1,23 @@
 <?php
 include 'db.php';
 
-$blogs = $conn->query("
+$search = trim($_GET['search'] ?? '');
+
+$stmt = $conn->prepare("
     SELECT blogs.*, users.name
     FROM blogs
     JOIN users ON blogs.user_id = users.id
+    WHERE blogs.title LIKE ? OR blogs.content LIKE ?
     ORDER BY blogs.created_at DESC
 ");
+
+$keyword = "%" . $search . "%";
+
+$stmt->bind_param("ss", $keyword, $keyword);
+$stmt->execute();
+
+$blogs = $stmt->get_result();
 ?>
-<?php if (isset($_SESSION['user_id'])): ?>
-    <h3>Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h3>
-    <a href="logout.php">Logout</a>
-<?php else: ?>
-    <a href="login.php">Login</a>
-    <a href="register.php">Register</a>
-<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,39 +41,53 @@ $blogs = $conn->query("
 </head>
 
 <body>
+<?php if (isset($_SESSION['user_id'])): ?>
 
+    <h3>Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h3>
+
+    <a href="logout.php">Logout</a>
+    <a href="profile.php">My Profile</a>
+
+<?php else: ?>
+
+    <a href="login.php">Login</a>
+    <a href="register.php">Register</a>
+
+<?php endif; ?>
+   
     <!-- ================= HEADER ================= -->
 
     <header>
 
-        <nav class="navbar">
+     
+<nav class="navbar">
 
-            <div class="logo">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <span>CampusConnect</span>
-            </div>
+    <div class="logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>CampusConnect</span>
+    </div>
 
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="create-blog.html">Write Blog</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+    <ul class="nav-links">
+        <li><a href="index.php" class="active">Home</a></li>
+        <li><a href="index.php#blogs">Blogs</a></li>
+        <li><a href="create_blog.php">Write Blog</a></li>
+        <li><a href="about.php">About</a></li>
+        <li><a href="contact.php">Contact</a></li>
+    </ul>
 
-            <div class="nav-right">
+    <div class="nav-right">
 
-                <div class="search-box">
-                    <input type="text" placeholder="Search blogs...">
-                    <button>
-                        <i class="fa-solid fa-search"></i>
-                    </button>
-                </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search blogs...">
+            <button>
+                <i class="fa-solid fa-search"></i>
+            </button>
+        </div>
 
-                <a href="login.html" class="btn login-btn">Login</a>
-            </div>
+        <a href="login.php" class="btn login-btn">Login</a>
+    </div>
 
-        </nav>
+</nav>
 
     </header>
 
@@ -93,7 +110,9 @@ $blogs = $conn->query("
 
             <div class="hero-buttons">
 
-                <a href="blogs.html" class="btn primary-btn">
+                <a href="index.php#blogs" class="btn primary-btn">
+    Explore Blogs
+</a>
                     Explore Blogs
                 </a>
 
@@ -112,6 +131,56 @@ $blogs = $conn->query("
         </div>
 
     </section>
+<section class="latest-blogs">
+<form method="GET" action="index.php" class="search-form">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search blogs..."
+        value="<?php echo htmlspecialchars($search); ?>"
+    >
+    <button type="submit">Search 🔍</button>
+</form>
+    <h2>Latest Campus Blogs</h2>
+
+    <?php while ($blog = $blogs->fetch_assoc()): ?>
+
+        <div class="blog-card">
+            <h3>
+                <?php echo htmlspecialchars($blog['title']); ?>
+            </h3>
+<?php if (!empty($blog['image'])): ?>
+    <img
+        src="<?php echo htmlspecialchars($blog['image']); ?>"
+        alt="Blog Image"
+        style="width:100%; max-width:500px; height:250px; object-fit:cover; border-radius:10px;"
+    >
+<?php endif; ?>
+            <p>
+                <?php echo nl2br(htmlspecialchars($blog['content'])); ?>
+            </p>
+
+            <small>
+                Published by:
+                <?php echo htmlspecialchars($blog['name']); ?>
+            </small>
+<br><br>
+
+<a href="view_blog.php?id=<?php echo $blog['id']; ?>">
+    Read More →
+</a>
+<?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $blog['user_id']): ?>
+    <br>
+    <a href="edit_blog.php?id=<?php echo $blog['id']; ?>">
+        Edit Blog ✏️
+    </a>
+<?php endif; ?>
+        </div>
+
+    <?php endwhile; ?>
+
+    <a href="create_blog.php">Write a New Blog</a>
+</section>
 
     <!-- ================= STATS ================= -->
 
@@ -1644,30 +1713,9 @@ $blogs = $conn->query("
     <!-- ================= JAVASCRIPT ================= -->
 
     <script src="js/script.js"></script>
-<section class="latest-blogs">
-    <h2>Latest Campus Blogs</h2>
-
-    <?php while ($blog = $blogs->fetch_assoc()): ?>
-
-        <div class="blog-card">
-            <h3>
-                <?php echo htmlspecialchars($blog['title']); ?>
-            </h3>
-
-            <p>
-                <?php echo nl2br(htmlspecialchars($blog['content'])); ?>
-            </p>
-
-            <small>
-                Published by:
-                <?php echo htmlspecialchars($blog['name']); ?>
-            </small>
-        </div>
-
-    <?php endwhile; ?>
-
-    <a href="create_blog.php">Write a New Blog</a>
-</section>
 </body>
 
 </html>
+
+
+
